@@ -38,12 +38,17 @@ function preload() {
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
-  video = createCapture(VIDEO);
+  video = createCapture(VIDEO, gotDetections);
   video.size(640, 480);
   video.hide();
-  detector.detect(video, (_, results) => {
-    detections = results;
-  });
+}
+
+function gotDetections(error, results) {
+  if (error) {
+    console.error(error);
+  }
+  detections = results;
+  detector.detect(video, gotDetections);
 }
 
 function draw() {
