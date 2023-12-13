@@ -34,3 +34,5 @@ google에서 개발한 라이브러리로, 본래 Python을 통해 활용하기�
 ## 🚼Object Detection
 
 `ml5.js`의 `cocossd`를 활용한 Object Detection이 가능하다.
+
+![image](https://github.com/kwb020312/Begin_Web_Machine_Learning/assets/46777310/131adc56-d048-44ff-acd5-5b7871cafa02)
