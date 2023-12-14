@@ -21,6 +21,26 @@ google에서 개발한 라이브러리로, 본래 Python을 통해 활용하기�
 ![image](https://github.com/kwb020312/Begin_Web_Merchine_Learning/assets/46777310/c1bfe65a-c672-43b2-9b71-d43727a1c0ea)
 ![image](https://github.com/kwb020312/Begin_Web_Merchine_Learning/assets/46777310/3d9d017b-e8e9-4b3a-91f6-e435cb270ed6)
 
+---
+
+## 😀Base Of Tensorflow
+
+데이터를 다차원의 형태로 표현해야할 때, VanilaJS를 사용한다면 다차원 배열 계산 수행시간이 복잡해질수록 너무 오래 걸리기 때문에 해당 라이브러리의 자료형으로 표현하고 계산해야한다.
+
+```javascript
+tf.scalar(1) // 정수 1(스칼라)
+tf.tensor1d([1, 2, 3]) // 1차원 배열
+tf.tensor2d(
+    [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ]
+) // 2차원 배열
+...
+tf.tensorxd(...) // N차원 배열 (최대 6차원)
+```
+
 ## 💤Image Classification
 
 `ml5.js`를 통해 `MobileNet`에 저장된 1000여가지의 Class를 분류해주는 Image Classification이 가능하다.
@@ -36,3 +56,5 @@ google에서 개발한 라이브러리로, 본래 Python을 통해 활용하기�
 `ml5.js`의 `cocossd`를 활용한 Object Detection이 가능하다.
 
 ![image](https://github.com/kwb020312/Begin_Web_Machine_Learning/assets/46777310/131adc56-d048-44ff-acd5-5b7871cafa02)
+
+---
