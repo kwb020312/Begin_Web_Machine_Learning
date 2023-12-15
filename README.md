@@ -87,6 +87,12 @@ async function loadModel() {
 loadModel();
 ```
 
+---
+
+## 💾TFHub
+
+Tensorflow에서 활용할 수 있는 [오픈소스 모델을 공유하는 사이트](https://www.kaggle.com/models?tfhub-redirect=true)이며, 각 모델은 사용법을 명시해주기 때문에 사용 전 참고하는것이 좋다.
+
 ## 💤Image Classification
 
 `ml5.js`를 통해 `MobileNet`에 저장된 1000여가지의 Class를 분류해주는 Image Classification이 가능하다.
