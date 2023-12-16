@@ -49,6 +49,8 @@ tf.tensorxd(...) // N차원 배열 (최대 6차원)
 
 입력값에 따른 0~1의 출력이다.
 
+![image](https://github.com/kwb020312/Begin_Web_Machine_Learning/assets/46777310/164b3b80-3117-44dc-bf72-c094b8cb9932)
+
 위 이미지는 머신러닝이 어떻게 동작하는지 매우 간단하게 보여주는데
 
 1. 정규화된 값(ex. 0.1, 0.2, ...)
