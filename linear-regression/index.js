@@ -42,3 +42,62 @@ console.log("Max Values: ");
 FEATURE_RESULTS.MAX_VALUES.print();
 
 INPUTS_TENSOR.dispose();
+
+const model = tf.sequential();
+
+model.add(tf.layers.dense({ inputShape: [2], units: 1 }));
+
+model.summary();
+
+train();
+
+async function train() {
+  const LEARNING_RATE = 0.01;
+
+  // 최적화 및 손실함수 입력
+  model.compile({
+    optimizer: tf.train.sgd(LEARNING_RATE),
+    loss: "meanSquaredError",
+  });
+
+  // 학습진행 정규화된 값과 출력 텐서를 전달
+  const results = await model.fit(
+    FEATURE_RESULTS.NORMALIZED_VALUES,
+    OUTPUTS_TENSOR,
+    {
+      validationSplit: 0.15, //
+      shuffle: true,
+      batchSize: 64,
+      epochs: 10,
+    }
+  );
+
+  OUTPUTS_TENSOR.dispose();
+  FEATURE_RESULTS.NORMALIZED_VALUES.dispose();
+
+  console.log("Average error loss: " + Math.sqrt(results.history.loss.at(-1)));
+  console.log(
+    "Average validation error loss: " +
+      Math.sqrt(results.history.val_loss.at(-1))
+  );
+  evaluate();
+}
+
+function evaluate() {
+  tf.tidy(() => {
+    const newInput = normalize(
+      tf.tensor2d([[750, 1]]),
+      FEATURE_RESULTS.MIN_VALUES,
+      FEATURE_RESULTS.MAX_VALUES
+    );
+
+    const output = model.predict(newInput.NORMALIZED_VALUES);
+    output.print();
+  });
+
+  FEATURE_RESULTS.MIN_VALUES.dispose();
+  FEATURE_RESULTS.MAX_VALUES.dispose();
+  model.dispose();
+
+  console.log(tf.memory().numTensors);
+}

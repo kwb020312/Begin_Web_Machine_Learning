@@ -98,6 +98,66 @@ function normalize(tensor, min, max) {
 
 ---
 
+## 😎Create Model & Predict
+
+```javascript
+async function train() {
+  const LEARNING_RATE = 0.01;
+
+  // 최적화 및 손실함수 입력
+  model.compile({
+    optimizer: tf.train.sgd(LEARNING_RATE),
+    loss: "meanSquaredError",
+  });
+
+  // 학습진행 정규화된 값과 출력 텐서를 전달
+  const results = await model.fit(
+    FEATURE_RESULTS.NORMALIZED_VALUES,
+    OUTPUTS_TENSOR,
+    {
+      validationSplit: 0.15, //
+      shuffle: true,
+      batchSize: 64,
+      epochs: 10,
+    }
+  );
+
+  OUTPUTS_TENSOR.dispose();
+  FEATURE_RESULTS.NORMALIZED_VALUES.dispose();
+
+  // 결과 표시, MSE를 손실함수로 사용했기 때문에 제곱근을 조회해야함
+  console.log("Average error loss: " + Math.sqrt(results.history.loss.at(-1)));
+  console.log(
+    "Average validation error loss: " +
+      Math.sqrt(results.history.val_loss.at(-1))
+  );
+  evaluate();
+}
+
+function evaluate() {
+  tf.tidy(() => {
+    // 새로운 입력값을 기반으로 정규화
+    const newInput = normalize(
+      tf.tensor2d([[750, 1]]),
+      FEATURE_RESULTS.MIN_VALUES,
+      FEATURE_RESULTS.MAX_VALUES
+    );
+
+    // 예측 후 표시
+    const output = model.predict(newInput.NORMALIZED_VALUES);
+    output.print();
+  });
+
+  FEATURE_RESULTS.MIN_VALUES.dispose();
+  FEATURE_RESULTS.MAX_VALUES.dispose();
+  model.dispose();
+
+  console.log(tf.memory().numTensors);
+}
+```
+
+---
+
 ## 😁Load Model
 
 생성된 모델을 불러와 입 출력을 확인해보자
