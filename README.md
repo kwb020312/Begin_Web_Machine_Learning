@@ -68,6 +68,36 @@ tf.tensorxd(...) // N차원 배열 (최대 6차원)
 
 ---
 
+## ↔Normalization
+
+정규화는 전처리 과정에서 반드시 실시되어야 한다.
+Tensorflow.js 의 전처리 함수는 아래와 같이 작성된다.
+
+```javascript
+// 정규화된 Tensor를 반환하는 함수
+function normalize(tensor, min, max) {
+  // tf.tidy()는 메모리 관리를 위해 사용되며, 생성된 텐서들은 이 블록이 끝난 후에 자동으로 해제
+  const result = tf.tidy(() => {
+    const MIN_VALUES = min || tf.min(tensor, 0);
+    const MAX_VALUES = max || tf.max(tensor, 0);
+
+    // 텐서에서 최소값을 뺀 결과를 저장
+    const TENSOR_SUBTRACT_MIN_VALUE = tf.sub(tensor, MIN_VALUES);
+
+    // 최댓값 - 최솟값을 통해 0~1 범위를 결정하는 '분모' 생성
+    const RANGE_SIZE = tf.sub(MAX_VALUES, MIN_VALUES);
+    // 0~1사잇값 반환
+    const NORMALIZED_VALUES = tf.div(TENSOR_SUBTRACT_MIN_VALUE, RANGE_SIZE);
+
+    return { NORMALIZED_VALUES, MIN_VALUES, MAX_VALUES };
+  });
+
+  return result;
+}
+```
+
+---
+
 ## 😁Load Model
 
 생성된 모델을 불러와 입 출력을 확인해보자
