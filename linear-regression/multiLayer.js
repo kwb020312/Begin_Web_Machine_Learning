@@ -41,11 +41,13 @@ INPUTS_TENSOR.dispose();
 
 const model = tf.sequential();
 
-model.add(tf.layers.dense({ inputShape: [1], units: 1 }));
+model.add(tf.layers.dense({ inputShape: [1], units: 25, activation: "relu" }));
+model.add(tf.layers.dense({ units: 25, activation: "relu" }));
+model.add(tf.layers.dense({ units: 1 }));
 
 model.summary();
 
-const LEARNING_RATE = 0.01;
+const LEARNING_RATE = 0.001;
 const OPTIMIZER = tf.train.sgd(LEARNING_RATE);
 
 train();
@@ -64,7 +66,7 @@ async function train() {
     {
       callbacks: { onEpochEnd: logProgress },
       shuffle: true,
-      batchSize: 2,
+      batchSize: 1,
       epochs: 200,
     }
   );
