@@ -271,3 +271,5 @@ loadAndRunModel();
 ---
 
 ## 🥼MNIST Fashion Classification
+
+![image](https://github.com/kwb020312/Begin_Web_Machine_Learning/assets/46777310/409f74a2-b6a4-43cc-8d07-874ca28e0909)
