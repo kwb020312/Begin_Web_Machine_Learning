@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion MNIST</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>TensorFlow.js Fashion MNIST classifier</h1>
+    <section class="box">
+      <h2>Prediction</h2>
+      <p>28 x 28 Pixel의 숫자 이미지 데이터 불러오기</p>
+      <canvas id="canvas" width="28" height="28"></canvas>
+    </section>
+    <section class="box">
+      <h2>예측</h2>
+      <p>학습된 AI를 바탕으로 입력된 이미지의 숫자를 예측하기</p>
+      <p>
+        붉은 색의 숫자는 잘못 예측되었음을 나타내며 초록색은 정상적으로
+        예측했음을 알아냄
+      </p>
+      <p id="prediction">모델 학습 중 입니다... 잠시만 기다려주세요.</p>
+    <div class="blocky">
+      <p id="domSpeed">
+        Classification 시간을 조절해보세요! 현재는 1000ms 입니다.
+      </p>
+      <input
+        type="range"
+        id="ranger"
+        min="15"
+        max="5000"
+        value="2000"
+        class="slider"
+      />
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"
+      type="text/javascript"
+    ></script>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>

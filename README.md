@@ -267,3 +267,7 @@ loadAndRunModel();
 ## 🔢MNIST Number Classification
 
 ![image](https://github.com/kwb020312/Begin_Web_Machine_Learning/assets/46777310/c7054cb5-520f-41da-929e-844802c65dd0)
+
+---
+
+## 🥼MNIST Fashion Classification
