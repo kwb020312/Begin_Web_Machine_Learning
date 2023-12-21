@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>자신만의 "Teachable Machine"을 만들어보세요!</h1>
+    <p id="status">TensorFlow JS 로딩중...</p>
+    <video id="webcam" autoplay></video>
+
+    <button id="enableCam">웹캠 허용</button>
+    <button class="dataCollector" data-1hot="0" data-name="Class 1">
+      Class 1 Data
+    </button>
+    <button class="dataCollector" data-1hot="1" data-name="Class 2">
+      Class 2 Data
+    </button>
+    <button id="train">학습 &amp; 예측!</button>
+    <button id="reset">리셋</button>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
