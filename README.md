@@ -23,6 +23,16 @@ google에서 개발한 라이브러리로, 본래 Python을 통해 활용하기�
 
 4. 사용자 접근성이 좋다
 
+파이썬 모델 접근 방식은 아래와 같다.
+
+![image](https://github.com/kwb020312/Begin_Web_Machine_Learning/assets/46777310/a9681f7f-ad53-4c8e-9834-af009f8cab1f)
+
+JS 모델 접근 방식은 아래와 같다.
+
+![image](https://github.com/kwb020312/Begin_Web_Machine_Learning/assets/46777310/303f9fe2-feed-46b8-a14b-7e7ec0bbfd66)
+
+이것이 Google에서 TensorFlow.JS를 만들게 된 큰 이유 중 하나이며, 그렇기에 Python으로 제작된 모델 파일도 JS로 변환하여 사용할 수 있다.
+
 ---
 
 ## 😀Base Of Tensorflow
