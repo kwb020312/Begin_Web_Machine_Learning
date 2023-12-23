@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>spam detect</title>
+  </head>
+  <body>
+    <h1>ChoTube</h1>
+    <h2>TensorFlow.js의 효율을 느껴보세요.</h2>
+    <iframe
+      width="100%"
+      height="500"
+      src="https://www.youtube.com/embed/RhVs7ijB17c"
+      frameborder="0"
+      allow="autoplay; encrypted-media;"
+      allowfullscreen
+    ></iframe>
+    <section id="comments" class="comments">
+      <div id="comment" class="comment" contenteditable></div>
+      <button id="post" type="button">댓글</button>
+      <ul id="commentsList">
+        <li>
+          <span class="username">누군가</span>
+          <span class="timestamp">2021/11/02 10:03:00 PM</span>
+          <p>와우, 전 이 영상이 좋아요!</p>
+        </li>
+      </ul>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
