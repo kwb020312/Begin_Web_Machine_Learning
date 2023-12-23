@@ -28,12 +28,24 @@ let trainingDataInputs = [];
 let trainingDataOutputs = [];
 let examplesCount = [];
 let predict = false;
+let mobileNetBase = undefined;
+
+function customPrint(line) {
+  const p = document.createElement("p");
+  p.innerText = line;
+  document.body.appendChild(p);
+}
 
 async function loadMobileNetFeatureModel() {
   const URL =
-    "https://tfhub.dev/google/tfjs-model/imagenet/mobilenet_v3_small_100_224/feature_vector/5/default/1";
-  mobilenet = await tf.loadGraphModel(URL, { fromTFHub: true });
-  STATUS.innerText = "MobileNet v3가 성공적으로 불러와졌습니다.";
+    "https://storage.googleapis.com/jmstore/TensorFlowJS/EdX/SavedModels/mobilenet-v2/model.json";
+  mobilenet = await tf.loadLayersModel(URL);
+  STATUS.innerText = "MobileNet v2가 성공적으로 불러와졌습니다.";
+  mobilenet.summary(null, null, customPrint);
+
+  const layer = mobilenet.getLayer("global_average_pooling2d_1");
+  mobileNetBase = tf.model({ inputs: mobilenet.inputs, outputs: layer.output });
+  mobileNetBase.summary();
 
   tf.tidy(function () {
     let answer = mobilenet.predict(
@@ -47,7 +59,7 @@ loadMobileNetFeatureModel();
 
 let model = tf.sequential();
 model.add(
-  tf.layers.dense({ inputShape: [1024], units: 128, activation: "relu" })
+  tf.layers.dense({ inputShape: [1280], units: 64, activation: "relu" })
 );
 model.add(
   tf.layers.dense({ units: CLASS_NAMES.length, activation: "softmax" })
@@ -104,7 +116,7 @@ function calculateFeaturesOnCurrentFrame() {
 
     let normalizedTensorFrame = resizedTensorFrame.div(255);
 
-    return mobilenet.predict(normalizedTensorFrame.expandDims()).squeeze();
+    return mobileNetBase.predict(normalizedTensorFrame.expandDims()).squeeze();
   });
 }
 
@@ -141,15 +153,29 @@ async function trainAndPredict() {
   let results = await model.fit(inputsAsTensor, oneHotOutputs, {
     shuffle: true,
     batchSize: 5,
-    epochs: 10,
+    epochs: 5,
     callbacks: { onEpochEnd: logProgress },
   });
 
   outputsAsTensor.dispose();
   oneHotOutputs.dispose();
   inputsAsTensor.dispose();
-
   predict = true;
+
+  let combinedModel = tf.sequential();
+  combinedModel.add(mobileNetBase);
+  combinedModel.add(model);
+
+  combinedModel.compile({
+    optimizer: "adam",
+    loss:
+      CLASS_NAMES.length === 2
+        ? "binaryCrossentropy"
+        : "categoricalCrossentropy",
+  });
+
+  combinedModel.summary();
+  await combinedModel.save("downloads://my-model");
   predictLoop();
 }
 
