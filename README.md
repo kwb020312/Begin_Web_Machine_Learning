@@ -21,6 +21,8 @@ google에서 개발한 라이브러리로, 본래 Python을 통해 활용하기�
 ![image](https://github.com/kwb020312/Begin_Web_Merchine_Learning/assets/46777310/c1bfe65a-c672-43b2-9b71-d43727a1c0ea)
 ![image](https://github.com/kwb020312/Begin_Web_Merchine_Learning/assets/46777310/3d9d017b-e8e9-4b3a-91f6-e435cb270ed6)
 
+4. 사용자 접근성이 좋다
+
 ---
 
 ## 😀Base Of Tensorflow
@@ -273,3 +275,5 @@ loadAndRunModel();
 ## 🥼MNIST Fashion Classification
 
 ![image](https://github.com/kwb020312/Begin_Web_Machine_Learning/assets/46777310/409f74a2-b6a4-43cc-8d07-874ca28e0909)
+
+---
