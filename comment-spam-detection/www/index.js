@@ -52,6 +52,13 @@ async function loadAndPredict(inputTensor, domComment) {
 
   const dataArray = results.dataSync();
   if (dataArray[1] > SPAM_THRESHOLD) domComment.classList.add("spam");
+  else {
+    socket.emit("comment", {
+      username: "AnonyMous",
+      timestamp: domComment?.querySelectorAll("span")[1].innerText,
+      comment: domComment?.querySelectorAll("p")[0].innerText,
+    });
+  }
 }
 
 // loadAndPredict(
@@ -78,3 +85,27 @@ function tokenize(wordArray) {
 
   return tf.tensor2d([returnArray]);
 }
+
+const socket = io.connect();
+
+function handleRemoteComments(data) {
+  const li = document.createElement("li");
+  const p = document.createElement("p");
+  p.innerText = data.comment;
+
+  const spanName = document.createElement("span");
+  spanName.setAttribute("class", "username");
+  spanName.innerText = data.username;
+
+  const spanDate = document.createElement("span");
+  spanDate.setAttribute("class", "timestamp");
+  spanDate.innerText = data.timestamp;
+
+  li.appendChild(spanName);
+  li.appendChild(spanDate);
+  li.appendChild(p);
+
+  COMMENTS_LIST.prepend(li);
+}
+
+socket.on("remoteComment", handleRemoteComments);
