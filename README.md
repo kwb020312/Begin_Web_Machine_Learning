@@ -31,6 +31,8 @@ JS 모델 접근 방식은 아래와 같다.
 
 ![image](https://github.com/kwb020312/Begin_Web_Machine_Learning/assets/46777310/303f9fe2-feed-46b8-a14b-7e7ec0bbfd66)
 
+서버를 경유하지않고 브라우저 내에서 실행되기에 민감한 정보가 서버를 거치지 않고 사용자 환경 내에서 동작하게된다.
+
 이것이 Google에서 TensorFlow.JS를 만들게 된 큰 이유 중 하나이며, 그렇기에 Python으로 제작된 모델 파일도 JS로 변환하여 사용할 수 있다.
 
 ---
